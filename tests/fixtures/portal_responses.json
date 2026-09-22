@@ -1,0 +1,205 @@
+{
+  "_note": "Answer bodies for the FOUR routes the Actor reads: /api-de-dados/ceis, /cnep, /cepim and /acordos-leniencia. Every key name here was copied from docs/portal-openapi-2026-09-20.json (CeisDTO, CnepDTO, CepimDTO, AcordosLenienciaDTO and the DTOs they nest), not guessed: tests/test_schema_contract.py checks the same document against src/rules.py. The sandbox has no route to api.portaldatransparencia.gov.br, so tests/run_local_e2e.py answers the HTTP calls from this file. The values are made up; the shape is the documented one. Person fields (PessoaDTO.nome, PessoaDTO.cpfFormatado, SancionadoDTO.nome, EmpresaSancionadaDTO.nomeInformadoOrgaoResponsavel) are present on purpose, so the allow list in src/rules.py has to drop them, and the CNEP answer carries one record typed as an individual on purpose, so the row filter has to discard the whole record and count it.",
+  "ceis": {
+    "11222333000181": [
+      {
+        "id": 8123456,
+        "dataReferencia": "19/09/2026",
+        "dataInicioSancao": "03/11/2025",
+        "dataFimSancao": "02/11/2027",
+        "dataPublicacaoSancao": "05/11/2025",
+        "dataTransitadoJulgado": "10/02/2026",
+        "dataOrigemInformacao": "06/11/2025",
+        "tipoSancao": {
+          "descricaoResumida": "Impedimento",
+          "descricaoPortal": "Impedimento de licitar e contratar com a Administracao Publica"
+        },
+        "fonteSancao": {
+          "nomeExibicao": "Ministerio da Saude",
+          "telefoneContato": "(61) 0000-0000",
+          "enderecoContato": "Esplanada dos Ministerios, Bloco G, Brasilia DF"
+        },
+        "fundamentacao": [
+          {
+            "codigo": "14133-156-III",
+            "descricao": "Lei 14.133/2021, art. 156, III"
+          }
+        ],
+        "orgaoSancionador": {
+          "nome": "MINISTERIO DA SAUDE",
+          "siglaUf": "DF",
+          "poder": "Executivo",
+          "esfera": "Federal"
+        },
+        "sancionado": {
+          "nome": "FORNECEDORA EXEMPLO LTDA",
+          "codigoFormatado": "11.222.333/0001-81"
+        },
+        "pessoa": {
+          "id": 771234,
+          "cpfFormatado": "",
+          "cnpjFormatado": "11.222.333/0001-81",
+          "numeroInscricaoSocial": "",
+          "nome": "FORNECEDORA EXEMPLO LTDA",
+          "razaoSocialReceita": "FORNECEDORA EXEMPLO LTDA",
+          "nomeFantasiaReceita": "EXEMPLO SUPRIMENTOS",
+          "tipo": "Pessoa juridica"
+        },
+        "textoPublicacao": "Aplicada a penalidade de impedimento de licitar e contratar pelo prazo de 24 meses.",
+        "linkPublicacao": "https://www.in.gov.br/web/dou/-/exemplo-8123456",
+        "detalhamentoPublicacao": "Diario Oficial da Uniao, Secao 3, pagina 118",
+        "numeroProcesso": "0008123-45.2025.4.03.6100",
+        "abrangenciaDefinidaDecisaoJudicial": "Orgao sancionador",
+        "informacoesAdicionaisDoOrgaoSancionador": "Processo administrativo concluido."
+      }
+    ],
+    "99888777000166": []
+  },
+  "cnep": {
+    "11222333000181": [
+      {
+        "id": 4412233,
+        "dataReferencia": "19/09/2026",
+        "dataInicioSancao": "15/01/2026",
+        "dataFimSancao": "15/01/2026",
+        "dataPublicacaoSancao": "17/01/2026",
+        "dataTransitadoJulgado": "",
+        "dataOrigemInformacao": "17/01/2026",
+        "tipoSancao": {
+          "descricaoResumida": "Multa",
+          "descricaoPortal": "Multa aplicada com base na Lei 12.846/2013"
+        },
+        "fonteSancao": {
+          "nomeExibicao": "Controladoria-Geral da Uniao",
+          "telefoneContato": "(61) 0000-0000",
+          "enderecoContato": "SAS Quadra 01, Bloco A, Brasilia DF"
+        },
+        "fundamentacao": [
+          {
+            "codigo": "12846-6-I",
+            "descricao": "Lei 12.846/2013, art. 6, I"
+          }
+        ],
+        "orgaoSancionador": {
+          "nome": "CONTROLADORIA-GERAL DA UNIAO",
+          "siglaUf": "DF",
+          "poder": "Executivo",
+          "esfera": "Federal"
+        },
+        "sancionado": {
+          "nome": "FORNECEDORA EXEMPLO LTDA",
+          "codigoFormatado": "11.222.333/0001-81"
+        },
+        "valorMulta": "350000.50",
+        "pessoa": {
+          "id": 771234,
+          "cpfFormatado": "",
+          "cnpjFormatado": "11.222.333/0001-81",
+          "numeroInscricaoSocial": "",
+          "nome": "FORNECEDORA EXEMPLO LTDA",
+          "razaoSocialReceita": "FORNECEDORA EXEMPLO LTDA",
+          "nomeFantasiaReceita": "EXEMPLO SUPRIMENTOS",
+          "tipo": "Pessoa juridica"
+        },
+        "textoPublicacao": "Multa aplicada em processo administrativo de responsabilizacao.",
+        "linkPublicacao": "https://www.in.gov.br/web/dou/-/exemplo-4412233",
+        "detalhamentoPublicacao": "Diario Oficial da Uniao, Secao 1, pagina 42",
+        "numeroProcesso": "00190.100123/2025-77",
+        "abrangenciaDefinidaDecisaoJudicial": "Nacional",
+        "informacoesAdicionaisDoOrgaoSancionador": ""
+      },
+      {
+        "id": 4412299,
+        "dataReferencia": "19/09/2026",
+        "dataInicioSancao": "20/01/2026",
+        "dataFimSancao": "20/01/2028",
+        "dataPublicacaoSancao": "22/01/2026",
+        "tipoSancao": {
+          "descricaoResumida": "Multa",
+          "descricaoPortal": "Multa aplicada com base na Lei 12.846/2013"
+        },
+        "orgaoSancionador": {
+          "nome": "CONTROLADORIA-GERAL DA UNIAO",
+          "siglaUf": "DF",
+          "poder": "Executivo",
+          "esfera": "Federal"
+        },
+        "sancionado": {
+          "nome": "Joao da Silva",
+          "codigoFormatado": "***.456.789-**"
+        },
+        "pessoa": {
+          "id": 998877,
+          "cpfFormatado": "***.456.789-**",
+          "cnpjFormatado": "",
+          "numeroInscricaoSocial": "",
+          "nome": "Joao da Silva",
+          "razaoSocialReceita": "",
+          "nomeFantasiaReceita": "",
+          "tipo": "Pessoa fisica"
+        },
+        "numeroProcesso": "00190.100999/2025-10"
+      }
+    ],
+    "99888777000166": []
+  },
+  "cepim": {
+    "11222333000181": [
+      {
+        "id": 55112,
+        "dataReferencia": "19/09/2026",
+        "motivo": "Prestacao de contas nao aprovada",
+        "orgaoSuperior": {
+          "nome": "MINISTERIO DA EDUCACAO",
+          "codigoSIAFI": "26000",
+          "cnpj": "00394445000144",
+          "sigla": "MEC",
+          "descricaoPoder": "Executivo",
+          "orgaoMaximo": {
+            "codigo": "26000",
+            "nome": "MINISTERIO DA EDUCACAO",
+            "sigla": "MEC"
+          }
+        },
+        "pessoaJuridica": {
+          "id": 771234,
+          "cpfFormatado": "",
+          "cnpjFormatado": "11.222.333/0001-81",
+          "numeroInscricaoSocial": "",
+          "nome": "FORNECEDORA EXEMPLO LTDA",
+          "razaoSocialReceita": "FORNECEDORA EXEMPLO LTDA",
+          "nomeFantasiaReceita": "EXEMPLO SUPRIMENTOS",
+          "tipo": "Pessoa juridica"
+        },
+        "convenio": {
+          "codigo": "912345",
+          "objeto": "Aquisicao de equipamentos para laboratorio escolar",
+          "numero": "912345/2023"
+        }
+      }
+    ],
+    "99888777000166": []
+  },
+  "acordos-leniencia": {
+    "11222333000181": [
+      {
+        "id": 3021,
+        "dataInicioAcordo": "01/03/2026",
+        "dataFimAcordo": "01/03/2030",
+        "orgaoResponsavel": "CONTROLADORIA-GERAL DA UNIAO",
+        "situacaoAcordo": "Em vigor",
+        "sancoes": [
+          {
+            "nomeInformadoOrgaoResponsavel": "Joao da Silva",
+            "razaoSocial": "FORNECEDORA EXEMPLO LTDA",
+            "nomeFantasia": "EXEMPLO SUPRIMENTOS",
+            "cnpj": "11222333000181",
+            "cnpjFormatado": "11.222.333/0001-81"
+          }
+        ],
+        "quantidade": 1
+      }
+    ],
+    "99888777000166": []
+  }
+}

@@ -1,0 +1,142 @@
+{
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "cnpj": {
+                "type": "string",
+                "title": "CNPJ",
+                "description": "The company number that was checked, digits only.",
+                "example": "00000000000191"
+            },
+            "cnpjFormatted": {
+                "type": "string",
+                "title": "CNPJ (formatted)",
+                "example": "00.000.000/0001-91"
+            },
+            "companyName": {
+                "type": ["string", "null"],
+                "title": "Company",
+                "description": "Legal name (razao social) registered at the Receita Federal for this CNPJ, copied from the sanction record only when that record's own identifier has the 14 digits of the CNPJ asked about. Null when no record returned a matching CNPJ. Never the name of an individual: records about a natural person are discarded before this point and counted in personRecordsDiscarded.",
+                "example": "EMPRESA EXEMPLO LTDA"
+            },
+            "tradeName": {
+                "type": ["string", "null"],
+                "title": "Trade name",
+                "description": "Nome fantasia registered at the Receita Federal for the same CNPJ, under the same 14-digit rule. Null when the registry does not carry one.",
+                "example": "EXEMPLO"
+            },
+            "verdict": {
+                "type": "string",
+                "title": "Verdict",
+                "description": "clear = none of the four registries (CEIS, CNEP, CEPIM, Acordos de Leniencia) returned a record for this CNPJ. flagged = at least one of them returned a record. error = the check could not be completed. A clear verdict is not a certificate of good standing.",
+                "enum": ["clear", "flagged", "error"],
+                "example": "clear"
+            },
+            "findingCount": {
+                "type": "integer",
+                "title": "Records found",
+                "example": 0
+            },
+            "findingsBySource": {
+                "type": "object",
+                "title": "Records per source",
+                "description": "How many records came from each of the four registries.",
+                "example": { "ceis": 1, "cnep": 1, "cepim": 1, "leniencia": 1 }
+            },
+            "findings": {
+                "type": "array",
+                "title": "Records",
+                "description": "One entry per sanction record found in CEIS, CNEP, CEPIM or Acordos de Leniencia: the registry, the official link to the record, sanction type or impediment reason, scope, dates, sanctioning body, legal basis and publication. The four registries do not fill the same fields, so a field the registry left empty is absent from that record. Fields about individuals (name, CPF, partner, legal representative) are never included.",
+                "example": [
+                    {
+                        "source": "ceis",
+                        "sanctionRegistry": "CEIS",
+                        "sourceUrl": "https://api.portaldatransparencia.gov.br/api-de-dados/ceis",
+                        "recordUrl": "https://api.portaldatransparencia.gov.br/api-de-dados/ceis/987654",
+                        "sanctionCategory": "Inidoneidade",
+                        "sanctionStartDate": "01/03/2025",
+                        "sanctioningBody": "Ministerio da Saude"
+                    }
+                ]
+            },
+            "sourcesChecked": {
+                "type": "array",
+                "title": "Sources checked",
+                "description": "The four registries read for this row, each with its official API URL and publisher: CEIS, CNEP, CEPIM and Acordos de Leniencia.",
+                "example": [
+                    {
+                        "source": "ceis",
+                        "label": "CEIS",
+                        "registry": "CEIS - Cadastro de Empresas Inidoneas e Suspensas",
+                        "publisher": "Controladoria-Geral da Uniao (CGU) - Portal da Transparencia",
+                        "url": "https://api.portaldatransparencia.gov.br/api-de-dados/ceis"
+                    }
+                ]
+            },
+            "checkedAt": {
+                "type": "string",
+                "title": "Checked at",
+                "description": "When the check ran, ISO 8601 in UTC.",
+                "example": "2026-09-20T12:00:00+00:00"
+            },
+            "justification": {
+                "type": "string",
+                "title": "Justification",
+                "description": "One sentence saying why the verdict is what it is, for your audit file.",
+                "example": "No sanction record was returned for CNPJ 00.000.000/0001-91 by CEIS and CNEP and CEPIM and LENIENCIA at 2026-09-20T12:00:00+00:00; this is not a certificate of good standing and it covers only these federal registries."
+            },
+            "dataAttribution": {
+                "type": "string",
+                "title": "Data attribution",
+                "example": "Source: Portal da Transparencia, Controladoria-Geral da Uniao (CGU), Brazil. Open data under Creative Commons Attribution, Decreto 8.777/2016."
+            },
+            "personRecordsDiscarded": {
+                "type": "integer",
+                "title": "Records about individuals discarded",
+                "description": "Records the registries returned about a natural person. They are counted and never published.",
+                "example": 0
+            },
+            "unmappedKeys": {
+                "type": "array",
+                "title": "Unmapped API keys",
+                "description": "Field names the API returned that this Actor does not publish. Names only, never values.",
+                "example": []
+            },
+            "error": {
+                "type": ["string", "null"],
+                "title": "Error",
+                "description": "Why the check failed, when the verdict is error.",
+                "example": null
+            }
+        }
+    },
+    "views": {
+        "overview": {
+            "title": "Verdict per company",
+            "transformation": {
+                "fields": [
+                    "cnpjFormatted",
+                    "companyName",
+                    "verdict",
+                    "findingCount",
+                    "findingsBySource",
+                    "justification",
+                    "checkedAt"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "cnpjFormatted": { "label": "CNPJ", "format": "text" },
+                    "companyName": { "label": "Company", "format": "text" },
+                    "verdict": { "label": "Verdict", "format": "text" },
+                    "findingCount": { "label": "Records", "format": "number" },
+                    "findingsBySource": { "label": "Per source", "format": "object" },
+                    "justification": { "label": "Justification", "format": "text" },
+                    "checkedAt": { "label": "Checked at", "format": "text" }
+                }
+            }
+        }
+    }
+}

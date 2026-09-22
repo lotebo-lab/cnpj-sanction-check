@@ -1,0 +1,34 @@
+{
+    "title": "Brazil CNPJ Sanction Check input",
+    "description": "Each company is checked against the four federal sanction registries published by the CGU on the Portal da Transparencia: CEIS (https://api.portaldatransparencia.gov.br/api-de-dados/ceis), CNEP (https://api.portaldatransparencia.gov.br/api-de-dados/cnep), CEPIM (https://api.portaldatransparencia.gov.br/api-de-dados/cepim) and Acordos de Leniencia (https://api.portaldatransparencia.gov.br/api-de-dados/acordos-leniencia). It does not cover state, municipal, TCU or court sanctions, it is not a certidao and it does not replace legal review.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "cnpjs": {
+            "title": "CNPJ list",
+            "type": "array",
+            "description": "The Brazilian company numbers to check, one per line. Each one is looked up in the four registries: CEIS, CNEP, CEPIM and Acordos de Leniencia. Punctuation is optional: 12.345.678/0001-99 and 12345678000199 both work. Anything that is not 14 digits is skipped and listed in the run summary.",
+            "editor": "stringList",
+            "prefill": ["00000000000191"],
+            "minItems": 1
+        },
+        "portalToken": {
+            "title": "Portal da Transparencia API token",
+            "type": "string",
+            "description": "Your own token for the Portal da Transparencia API, used to read the four registries. The token costs nothing, but getting one is not only an e-mail: https://portaldatransparencia.gov.br/api-de-dados/cadastrar-email redirects to the gov.br single sign-on and asks you to sign in with a gov.br account (CPF and password), checked on 2026-09-20. After you sign in, the token is issued to you and arrives by e-mail. The token is yours, not ours: this Actor has no token of its own and shares none. It sends yours only in the 'chave-api-dados' header of the Portal request, and never stores it or writes it to the dataset or the log. If the Portal refuses your token, the run checks nothing and says so in the 'summary' row of the dataset; an unchecked company is never reported as clear.",
+            "editor": "textfield",
+            "isSecret": true
+        },
+        "maxCnpjs": {
+            "title": "Max companies per run",
+            "type": "integer",
+            "description": "Safety ceiling on how many companies one run checks, so a long list cannot spend more than you expect. Each company costs one charged event and four registry queries. Extra companies are skipped and listed in the run summary.",
+            "editor": "number",
+            "default": 200,
+            "minimum": 1,
+            "maximum": 1000,
+            "unit": "companies"
+        }
+    },
+    "required": ["cnpjs", "portalToken"]
+}

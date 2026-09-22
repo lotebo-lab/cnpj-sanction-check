@@ -1,0 +1,1 @@
+"""CNPJ Sanction Check Actor."""

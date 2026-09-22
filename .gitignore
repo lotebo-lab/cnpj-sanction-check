@@ -1,0 +1,11 @@
+storage/
+apify_storage/
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
+.env
+.git/
+logs/
+.claude/

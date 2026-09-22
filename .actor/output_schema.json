@@ -1,0 +1,19 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "CNPJ Sanction Check output",
+    "description": "One row per company checked, plus a run summary.",
+    "properties": {
+        "verdicts": {
+            "type": "string",
+            "title": "Verdict per company",
+            "description": "One item per CNPJ: verdict, records found per registry, the records themselves, the sources and the timestamp.",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
+        },
+        "summary": {
+            "type": "string",
+            "title": "Run summary",
+            "description": "How many companies were checked, how many were flagged, invalid inputs, API requests made and charged events.",
+            "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+        }
+    }
+}
