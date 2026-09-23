@@ -227,8 +227,8 @@ def test_event_names_match_the_actor_definition() -> None:
         actor_main.EVENT_COMPANY_CHECKED,
         actor_main.EVENT_BATCH_REPORT,
     }
-    assert events[actor_main.EVENT_COMPANY_CHECKED]["eventPriceUsd"] == 0.1
-    assert events[actor_main.EVENT_BATCH_REPORT]["eventPriceUsd"] == 0.25
+    assert events[actor_main.EVENT_COMPANY_CHECKED]["eventPriceUsd"] == 0.02
+    assert events[actor_main.EVENT_BATCH_REPORT]["eventPriceUsd"] == 0.05
 
 
 def test_the_cnpj_ceiling_per_run_exists_and_matches_the_input_schema() -> None:

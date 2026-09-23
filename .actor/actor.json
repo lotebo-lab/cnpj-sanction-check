@@ -18,12 +18,12 @@
       "company-checked": {
         "eventTitle": "Company checked",
         "eventDescription": "One CNPJ screened against four CGU federal registries, CEIS, CNEP, CEPIM and Acordos de Leniencia, with verdict, records and source links.",
-        "eventPriceUsd": 0.1
+        "eventPriceUsd": 0.02
       },
       "batch-report": {
         "eventTitle": "Batch report",
         "eventDescription": "The run summary: how many companies were checked, how many were flagged, which of the four registries were read and when. Charged once per run, only when at least one company was checked.",
-        "eventPriceUsd": 0.25
+        "eventPriceUsd": 0.05
       }
     }
   }
