@@ -1,14 +1,31 @@
 # Brazil CNPJ Sanction Check: CEIS, CNEP, CEPIM and Leniency Agreements
-
+Before you contract a Brazilian company you have to clear its CNPJ against the federal sanction registries, and by hand that means searching the CGU portal four times for every supplier.
 **Run it on the Apify Store: https://apify.com/lotebo-lab/cnpj-sanction-check**
-
-Before you contract a Brazilian company you have to clear it against the federal sanction registries, and doing that by hand means opening the CGU portal and searching the same CNPJ four times, one registry at a time, for every supplier on the list.
 
 Give this Actor a list of company numbers (CNPJ) and it checks each one against **four federal sanction registries published by the CGU on the Portal da Transparência** — CEIS, CNEP, CEPIM and Acordos de Leniência. You get one row per company with a `clear` or `flagged` verdict, every sanction record found, the official link to each record, and the UTC timestamp of the check.
 
 **An automated lookup does not attest that a company is idônea, it is not a certidão, and it does not replace legal analysis.** A `clear` verdict means only that these four federal registries returned no record for that CNPJ at that moment. What is left out is listed by name under "What this Actor does not do".
 
 This repository holds the source code. The Actor runs on the Apify platform, so there is nothing to install.
+
+## Quick start
+
+1. Open https://apify.com/lotebo-lab/cnpj-sanction-check and switch the input to JSON.
+2. Paste this input, which is valid against [`.actor/input_schema.json`](.actor/input_schema.json), and start the run:
+
+```json
+{
+  "cnpjs": [
+    "00000000000191"
+  ],
+  "portalToken": "<your own free Portal da Transparencia token>",
+  "maxCnpjs": 200
+}
+```
+
+Replace the placeholder with your own token: `portalToken` is required, and how to get one for free is explained under "What goes in".
+
+Price, as read from the public Apify Store API (`currentPricingInfo`) on 2026-09-23 16:25 UTC: US$ 0.02 per `company-checked` event (one CNPJ screened against all four registries) plus US$ 0.05 per `batch-report` event, once per run. Apify charges the platform usage of the run on top; that part is set by the platform, not by this Actor. The full table is under "Price".
 
 ## Use cases
 
@@ -147,7 +164,7 @@ Several of the checks in `tests/test_rules.py` exist only for this rule.
 
 ## Price
 
-Pay per event, two events. These are the prices in force on the platform, so they are what a run of yours is charged:
+Pay per event, two events. These prices were read from the public Apify Store API (`currentPricingInfo`) on 2026-09-23 16:25 UTC, and they are what a run of yours is charged:
 
 | event | price | when it is charged |
 |---|---|---|
