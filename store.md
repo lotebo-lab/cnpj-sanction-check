@@ -108,8 +108,10 @@ sócio e nome de representante legal não chegam ao dataset. Isso é testado em
 ## Token: é do comprador, não nosso
 
 O campo de entrada `portalToken` recebe o token gratuito do próprio comprador,
-pedido em https://portaldatransparencia.gov.br/api-de-dados/cadastrar-email só
-com um e-mail, sem custo e sem cadastro adicional, e entregue por e-mail. Não
+pedido em https://portaldatransparencia.gov.br/api-de-dados/cadastrar-email sem
+custo e entregue por e-mail. Correção medida em 20/09/2026: essa página
+redireciona para o login do gov.br e exige CPF, então o cadastro não é só um
+e-mail, como esta nota dizia antes. Não
 temos token e não emprestamos nenhum; a descrição do campo no
 `input_schema.json` diz isso com todas as letras. O Actor manda o token só no cabeçalho `chave-api-dados` da
 API do Portal, e nunca no dataset, no log ou na query. O campo está marcado
