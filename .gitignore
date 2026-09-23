@@ -1,11 +1,30 @@
+# Apify local state
 storage/
 apify_storage/
+
+# Python
 .venv/
 __pycache__/
 *.pyc
+.pytest_cache/
+
+# Node
 node_modules/
+
+# OS and editors
 .DS_Store
-.env
-.git/
-logs/
 .claude/
+
+# Never publish credentials
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+
+# Local git leftovers
+.git/
+
+# Internal notes, not part of the Actor source
+logs/
+store.md
